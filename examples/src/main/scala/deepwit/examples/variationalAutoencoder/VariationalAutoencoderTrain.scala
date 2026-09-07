@@ -8,7 +8,7 @@ import deepwit.examples.dataset.MNISTLoader
 
 import deepwit.checkpointing.TensorTreeCheckpointer
 import deepwit.loss.BinaryCrossEntropy
-import deepwit.training.{Monitor, tapEvery}
+import deepwit.training.{Monitor, after, tapEvery}
 
 case class TrainState(
     params: VariationalAutoencoder.Params,
@@ -101,8 +101,7 @@ def train(): Unit =
       case (state, step) =>
         checkpointer.save(state, step)
         println(s"Checkpoint saved at step $step")
-    .drop(numIterations)
-    .next()
+    .after(numIterations)
 
   println(f"Final cost: ${finalState.lastCost.item}%.6f")
   println(s"Done. Wrote ${checkpointer.rootPath}.")

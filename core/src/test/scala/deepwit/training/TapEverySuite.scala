@@ -22,15 +22,21 @@ class TapEverySuite extends AnyFunSpec with Matchers:
       Iterator.from(0).tapEvery(1)((_, id) => seen += id).take(3).toList
       seen.toList shouldBe List(1, 2)
 
-  describe("LazyList.tapEvery"):
+  describe("Iterator.after"):
 
-    it("fires at every n-th index but not at zero"):
-      val seen = ListBuffer.empty[(String, Int)]
-      LazyList.from(0).map(i => s"e$i").tapEvery(3)((t, id) => seen += ((t, id))).take(10).toList
-      seen.toList shouldBe List(("e3", 3), ("e6", 6), ("e9", 9))
+    it("counts from zero, so the first element is the state after no steps"):
+      Iterator.from(0).after(0) shouldBe 0
 
-    it("stays lazy until the elements are forced"):
-      val seen = ListBuffer.empty[Int]
-      val tapped = LazyList.from(0).tapEvery(1)((_, id) => seen += id)
-      seen.toList shouldBe empty
-      tapped.take(3).toList shouldBe List(0, 1, 2)
+    it("returns the element that many steps in"):
+      Iterator.from(0).after(3) shouldBe 3
+
+    it("advances the iterator past what it returns"):
+      val trajectory = Iterator.from(0)
+      trajectory.after(3) shouldBe 3
+      trajectory.next() shouldBe 4
+
+    it("throws when the iterator ends first"):
+      a[NoSuchElementException] should be thrownBy Iterator(0, 1).after(5)
+
+    it("rejects a negative number of steps"):
+      an[IllegalArgumentException] should be thrownBy Iterator.from(0).after(-1)

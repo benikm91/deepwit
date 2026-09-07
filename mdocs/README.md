@@ -7,6 +7,7 @@ import deepwit.activation.gelu
 import deepwit.base.{AffineFormLayer, AffineLayer}
 import deepwit.checkpointing.TensorTreeCheckpointer
 import deepwit.loss.SquaredError
+import deepwit.training.after
 
 dimwit.initialize()
 
@@ -142,7 +143,7 @@ Training the model reduces to a termination condition on this iterator; here aft
 A model checkpointer serializes the final train state object.
 
 ```scala mdoc:compile-only
-val finalState = trainTrajectory.drop(numIterations).next()
+val finalState = trainTrajectory.after(numIterations)
 
 TensorTreeCheckpointer.newIn(checkpointRoot).save(finalState, numIterations)
 ```
@@ -179,7 +180,7 @@ The user code composes these core modules into custom architectures given the us
 | `deepwit.init` | Xavier/Glorot normal and uniform, for matrices and vectors |
 | `deepwit.regularization` | `Perturbation` — thinning (dropout) as a mutation of the weights that *read* a feature |
 | `deepwit.optimizer` | `LearningRateSchedule` (constant, linear warmup, cosine decay), `LearningRateScheduler`, `clipGlobalNorm` |
-| `deepwit.training` | `Monitor` (step, loss, throughput, learning rate), `tapEvery` |
+| `deepwit.training` | `Monitor` (step, loss, throughput, learning rate), `tapEvery`, `after` |
 | `deepwit.checkpointing` | `TensorTreeCheckpointer` — save and load any `TensorTree` by iteration |
 
 ## Relationship to DimWit
