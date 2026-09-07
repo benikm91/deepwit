@@ -4,7 +4,7 @@ import deepwit.loss.CategoricalCrossEntropy
 
 import dimwit.*
 import dimwit.Conversions.given
-import deepwit.training.{Monitor, tapEvery}
+import deepwit.training.{Monitor, after, tapEvery}
 import deepwit.optimizer.*
 import dimwit.optimizer.{AdamW, Adam, AdamState}
 import dimwit.TreeOf.ops.*
@@ -186,5 +186,4 @@ import Config.*
         logger.save(state, step)
         println(s"Checkpoint saved")
         println("-" * 30)
-    .drop(1_000_000_000)
-    .next()
+    .after(1_000_000_000)

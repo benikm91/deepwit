@@ -8,7 +8,7 @@ import deepwit.loss.CategoricalCrossEntropy
 
 import deepwit.examples.dataset.{MNISTLoader, MNISTBatchSample}
 import dimwit.optimizer.GradientDescentState
-import deepwit.training.{Monitor, tapEvery}
+import deepwit.training.{Monitor, after, tapEvery}
 import deepwit.checkpointing.TensorTreeCheckpointer
 
 case class TrainState(
@@ -81,7 +81,6 @@ def train(): Unit =
       case (state, step) =>
         checkpointer.save(state, step)
         println(s"Checkpoint saved at epoch $step")
-    .drop(numIterations)
-    .next()
+    .after(numIterations)
 
   println(s"Done. Wrote ${checkpointer.rootPath}.")

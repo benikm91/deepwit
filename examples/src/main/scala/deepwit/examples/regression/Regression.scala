@@ -9,6 +9,7 @@ import io.circe.Json
 import plotwit.*
 import plotwit.PlotTargets.desktopBrowser
 
+import deepwit.training.after
 import deepwit.activation.gelu
 import deepwit.base.{AffineFormLayer, AffineLayer}
 import deepwit.checkpointing.TensorTreeCheckpointer
@@ -104,8 +105,7 @@ def train(): Unit =
   // -- Run train trajectory --
 
   val finalState = trainTrajectory
-    .drop(numIterations)
-    .next()
+    .after(numIterations)
 
   // -- Save the fitted state --
 

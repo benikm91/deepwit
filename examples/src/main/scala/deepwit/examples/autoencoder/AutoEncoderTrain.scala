@@ -6,7 +6,7 @@ import dimwit.Conversions.given
 import deepwit.examples.dataset.MNISTLoader
 import MNISTLoader.TestSample
 
-import deepwit.training.{Monitor, tapEvery}
+import deepwit.training.{Monitor, after, tapEvery}
 import deepwit.checkpointing.TensorTreeCheckpointer
 import deepwit.loss.BinaryCrossEntropy
 import dimwit.optimizer.{Adam, AdamState}
@@ -83,7 +83,6 @@ def train(): Unit =
       case (state, step) =>
         checkpointer.save(state, step)
         println(s"Checkpoint saved at epoch $step")
-    .drop(numIterations)
-    .next()
+    .after(numIterations)
 
   println(s"Done. Wrote ${checkpointer.rootPath}.")

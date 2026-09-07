@@ -4,7 +4,7 @@ import dimwit.*
 import dimwit.Conversions.given
 import dimwit.optimizer.{Adam, AdamState}
 
-import deepwit.training.{Monitor, tapEvery}
+import deepwit.training.{Monitor, after, tapEvery}
 import deepwit.checkpointing.TensorTreeCheckpointer
 import deepwit.loss.SquaredError
 
@@ -103,8 +103,7 @@ def train(): Unit =
   val finalState = trainTrajectory
     .tapEvery(100):
       case (state, step) => println(trainMonitor.report(step, state))
-    .drop(numIterations)
-    .next()
+    .after(numIterations)
 
   // -- Save final state --
 
