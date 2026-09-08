@@ -9,7 +9,7 @@ import deepwit.optimizer.*
 import dimwit.optimizer.{AdamW, Adam, AdamState}
 import dimwit.TreeOf.ops.*
 
-import FineWebDataset.{BatchSample, batchStream}
+import FineWebDataset.{BatchSample, batchStream, defaultDataDir}
 
 import dimwit.TreeOf.map
 
@@ -80,8 +80,8 @@ import Config.*
   )
 
   val (trainKey, valKey) = dataKey.split2()
-  val trainStream = batchStream("/home/mebr/Documents/Scala/modded-nanogpt/data/fineweb10B", "fineweb_train_", runningBatchSize, contextExtent.size, trainKey)
-  val valStream = batchStream("/home/mebr/Documents/Scala/modded-nanogpt/data/fineweb10B", "fineweb_val_", runningBatchSize, contextExtent.size, valKey)
+  val trainStream = batchStream(defaultDataDir, "fineweb_train_", runningBatchSize, contextExtent.size, trainKey)
+  val valStream = batchStream(defaultDataDir, "fineweb_val_", runningBatchSize, contextExtent.size, valKey)
 
   def loss[V: IsFloating](
       targets: Tensor1[Context, Int32],

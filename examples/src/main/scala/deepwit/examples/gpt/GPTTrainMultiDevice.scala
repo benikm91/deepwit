@@ -88,10 +88,7 @@ case class BatchSample(
   )
 
   val (trainKey, valKey) = dataKey.split2()
-  val dataDir = sys.env.getOrElse(
-    "FINEWEB_DIR",
-    sys.error("FINEWEB_DIR is not set. Point it at the directory holding the fineweb_train_/fineweb_val_ shards.")
-  )
+  val dataDir = FineWebDataset.defaultDataDir
   val trainStream = batchStream(dataDir, "fineweb_train_", runningBatchSize, contextExtent.size, trainKey).map(shardBatch)
   val valStream = batchStream(dataDir, "fineweb_val_", runningBatchSize, contextExtent.size, valKey).map(shardBatch)
 

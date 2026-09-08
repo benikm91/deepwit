@@ -19,6 +19,11 @@ object FineWebDataset:
 
   lazy val np = py.module("numpy")
 
+  /** The directory `examples/setup-fineweb.sh` fills, relative to the forked run's working
+    * directory, unless FINEWEB_DIR points somewhere else.
+    */
+  val defaultDataDir: String = sys.env.getOrElse("FINEWEB_DIR", "data/fineweb10B")
+
   // 1. Updated to skip the 1024-byte header
   def loadShard(binaryPath: String): LazyTensor1[Sample, UInt16] =
     liftPyTensor(

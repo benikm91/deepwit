@@ -133,6 +133,16 @@ Examples implemented in DeepWit:
 | [`gpt`](examples/src/main/scala/deepwit/examples/gpt/) | GPT-2 decoder trained on FineWeb |
 | [`thinning`](examples/src/main/scala/deepwit/examples/thinning/) | Two-moons classifier; showcasing network thinning (functional replacement for dropout) |
 
+The MNIST and GPT examples need their dataset downloaded first:
+
+```bash
+examples/setup-mnist.sh            # MNIST, ~55 MB
+examples/setup-fineweb.sh          # FineWeb-10B: val + 1 train shard, ~400 MB
+examples/setup-fineweb.sh all      # all 103 train shards, ~21 GB
+```
+
+Both write into `examples/data`, where the examples look by default.
+
 ## What's in `core`
 
 DeepWit provides implementations for core deep learning modules with clear, strongly-typed boundaries. 
