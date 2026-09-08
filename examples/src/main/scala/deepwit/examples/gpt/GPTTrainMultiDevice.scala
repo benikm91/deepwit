@@ -16,7 +16,27 @@ import dimwit.TreeOf.map
 import deepwit.optimizer.LearningRateSchedule
 import deepwit.optimizer.LearningRateSchedules.LinearWarmup
 
-import Config.*
+object Config2:
+  val batchSizePerDevice = 16
+  val effectiveBatchSize = 512
+  val baseLearningRate = 6e-4f
+  val minLearningRate = baseLearningRate / 10f
+  val beta1 = 0.9f
+  val beta2 = 0.95f
+  val gradientClipNorm: Float = 1.0f
+  val weightDecayFactor = 0.1f
+
+  val numLayers = 12
+  val vocabExtent = Axis[Vocab] -> 50304
+  val contextExtent = Axis[Context] -> 1024
+  val numHeads = 12
+  val embeddingExtent = Axis[Embedding] -> 64 * numHeads
+  val embeddingMixedExtent = Axis[EmbeddingMixed] -> 3072
+
+  val valTokens = 10485760
+  val valSamples = valTokens / contextExtent.size
+
+import Config2.*
 
 /** The mesh axis the batch is split over. */
 trait Data derives MeshLabel
@@ -44,8 +64,8 @@ case class BatchSample(
   val devices = dimwit.jax.Jax.devices.size
 
   // The three Config values that depend on how many devices there are. Each device runs
-  // Config.runningBatchSize, so the same effective batch needs proportionally fewer accumulations.
-  val runningBatchSize = Config.runningBatchSize * devices
+  // runningBatchSize, so the same effective batch needs proportionally fewer accumulations.
+  val runningBatchSize = batchSizePerDevice * devices
   val accumulationSteps = effectiveBatchSize / runningBatchSize
   val numBatchesPerValidation = valSamples / runningBatchSize
 
@@ -56,7 +76,7 @@ case class BatchSample(
 
   val mesh = Mesh(MeshAxis[Data] -> devices)
   println(s"Training over $mesh: ${mesh.devices.map(d => s"${d.platform}:${d.id}").mkString(", ")}")
-  println(s"running batch $runningBatchSize (${Config.runningBatchSize} per device), $accumulationSteps accumulation steps")
+  println(s"running batch $runningBatchSize (${batchSizePerDevice} per device), $accumulationSteps accumulation steps")
 
   def shardBatch(batch: FineWebDataset.BatchSample): BatchSample =
     BatchSample(
