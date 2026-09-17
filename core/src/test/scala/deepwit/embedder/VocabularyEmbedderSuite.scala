@@ -32,7 +32,7 @@ class VocabularyEmbedderSuite extends AnyFunSpec with Matchers:
       embedder.unembed(embedding) should approxEqual(Tensor(Shape1(vocabExtent)).fromArray(Array(1f, 3f, 5f)), 1e-6f)
 
     it("recovers the token through unembed when the embeddings are orthonormal"):
-      val orthonormal = VocabularyEmbedder(VocabularyEmbedder.Params(Tensor2.eye(vocabExtent)))
+      val orthonormal = VocabularyEmbedder(VocabularyEmbedder.Params(Tensor2(vocabExtent).eye))
       (0 until 3).foreach: token =>
         val logits = orthonormal.unembed(orthonormal(Tensor0(token)))
         logits.argmax(Axis[A]).item shouldBe token

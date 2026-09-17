@@ -41,7 +41,7 @@ object AffineLayer:
 
     def identity[In: Λ, V: IsFloating](extent: AxisExtent[In], vtype: VType[V] = VType[Float32]): Params[In, Prime[In], V] =
       Params(
-        weight = Tensor2.eye(extent, vtype),
+        weight = Tensor2(extent).eye(vtype),
         bias = Tensor(Shape(Axis[Prime[In]] -> extent.size), vtype).fill(0f)
       )
 
