@@ -1,7 +1,8 @@
 package deepwit.activation
 
-import deepwit.*
 import dimwit.*
+import deepwit.*
+import deepwit.activation.softmax
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.funspec.AnyFunSpec
 
