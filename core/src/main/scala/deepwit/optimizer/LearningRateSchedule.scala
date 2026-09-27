@@ -1,7 +1,6 @@
 package deepwit.optimizer
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.optimizer.GradientOptimizer
 
 case class LearningRateSchedulerState[P, State[_]](

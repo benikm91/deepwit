@@ -1,7 +1,6 @@
 package deepwit.loss
 
 import dimwit.*
-import dimwit.Conversions.given
 
 object SquaredError:
 

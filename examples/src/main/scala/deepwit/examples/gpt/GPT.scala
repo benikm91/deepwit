@@ -1,7 +1,6 @@
 package deepwit.examples.gpt
 
 import dimwit.*
-import dimwit.Conversions.given
 import deepwit.activation.softmax
 import deepwit.attention.{Head, HeadKey, HeadQuery, HeadValue}
 import dimwit.stats.Categorical

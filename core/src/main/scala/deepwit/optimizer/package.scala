@@ -1,7 +1,6 @@
 package deepwit.optimizer
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.TreeOf
 import dimwit.TreeOf.{map, mapLeaves}
 

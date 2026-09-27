@@ -1,7 +1,6 @@
 package deepwit.normalization
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.Label as Λ
 
 import deepwit.{defaultEpsilon, unwrapEpsilon}

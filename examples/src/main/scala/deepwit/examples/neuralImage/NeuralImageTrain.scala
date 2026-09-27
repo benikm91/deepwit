@@ -1,7 +1,6 @@
 package deepwit.examples.neuralImage
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.optimizer.{Adam, AdamState}
 
 import deepwit.training.{Monitor, after, tapEvery}

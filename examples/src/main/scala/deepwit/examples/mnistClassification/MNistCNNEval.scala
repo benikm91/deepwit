@@ -4,7 +4,6 @@ import deepwit.checkpointing.TensorTreeCheckpointer
 import deepwit.examples.dataset.MNISTLoader
 
 import dimwit.*
-import dimwit.Conversions.given
 import plotwit.*
 
 import plotwit.PlotTargets.desktopBrowser

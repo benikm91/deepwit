@@ -1,6 +1,5 @@
 ```scala mdoc:invisible
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.optimizer.{Adam, AdamState}
 
 import deepwit.activation.gelu

@@ -4,7 +4,6 @@ import dimwit.*
 
 import deepwit.examples.dataset.TwoMoons
 import deepwit.examples.dataset.TwoMoons.{Feature, Output}
-import dimwit.Conversions.given
 import io.circe.Json
 import plotwit.*
 

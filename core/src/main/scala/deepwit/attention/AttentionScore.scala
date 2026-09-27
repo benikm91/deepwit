@@ -1,7 +1,6 @@
 package deepwit.attention
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.Label as Λ
 
 /** Scores how strongly each target position attends to each source position, before masking. */
