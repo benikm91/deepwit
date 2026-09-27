@@ -1,7 +1,6 @@
 package deepwit.embedder
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.Label as Λ
 
 object PositionalEncoding:

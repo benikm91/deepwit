@@ -1,7 +1,6 @@
 package deepwit.loss
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.Label as Λ
 
 /** * Categorical (Multiclass) Cross Entropy Losses.

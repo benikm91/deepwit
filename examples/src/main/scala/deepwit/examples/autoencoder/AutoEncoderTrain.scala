@@ -1,7 +1,6 @@
 package deepwit.examples.autoencoder
 
 import dimwit.*
-import dimwit.Conversions.given
 
 import deepwit.examples.dataset.MNISTLoader
 import MNISTLoader.TestSample

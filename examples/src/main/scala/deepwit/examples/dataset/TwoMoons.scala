@@ -1,7 +1,6 @@
 package deepwit.examples.dataset
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.stats.Normal
 
 /** Two interleaving half circles, the smallest dataset no straight line can separate.

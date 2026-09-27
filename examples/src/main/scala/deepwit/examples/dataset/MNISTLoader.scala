@@ -1,7 +1,6 @@
 package deepwit.examples.dataset
 
 import dimwit.*
-import dimwit.Conversions.given
 
 import me.shadaj.scalapy.py
 import java.io.RandomAccessFile

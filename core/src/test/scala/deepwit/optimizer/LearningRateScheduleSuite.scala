@@ -1,7 +1,6 @@
 package deepwit.optimizer
 
 import dimwit.*
-import dimwit.Conversions.given
 import org.scalatest.propspec.AnyPropSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.funspec.AnyFunSpec

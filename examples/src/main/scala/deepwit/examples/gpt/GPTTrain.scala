@@ -3,7 +3,6 @@ import deepwit.checkpointing.TensorTreeCheckpointer
 import deepwit.loss.CategoricalCrossEntropy
 
 import dimwit.*
-import dimwit.Conversions.given
 import deepwit.training.{Monitor, after, tapEvery}
 import deepwit.optimizer.*
 import dimwit.optimizer.{AdamW, Adam, AdamState}

@@ -1,7 +1,6 @@
 package deepwit.examples.variationalAutoencoder
 
 import dimwit.*
-import dimwit.Conversions.given
 import plotwit.*
 
 import deepwit.checkpointing.TensorTreeCheckpointer

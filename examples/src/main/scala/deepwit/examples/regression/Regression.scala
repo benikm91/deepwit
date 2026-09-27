@@ -1,7 +1,6 @@
 package deepwit.examples.regression
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.optimizer.{Adam, AdamState}
 import dimwit.stats.{Normal, Uniform}
 

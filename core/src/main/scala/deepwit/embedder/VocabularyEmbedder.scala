@@ -1,7 +1,6 @@
 package deepwit.embedder
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.stats.Normal
 import dimwit.stats.Uniform
 import dimwit.Label as Λ

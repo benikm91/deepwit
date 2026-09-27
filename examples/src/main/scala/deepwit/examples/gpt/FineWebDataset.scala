@@ -2,7 +2,6 @@ package deepwit.examples.gpt
 
 import java.io.File
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.python.PyBridge.liftPyTensor
 import me.shadaj.scalapy.py
 import dimwit.stats.Uniform

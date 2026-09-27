@@ -7,7 +7,6 @@ class MonitorSuite extends AnyFunSpec with Matchers:
 
   import Monitor.{ConcatMonitor, LearningRateMonitor, LossMonitor, PerformanceMonitor, StepMonitor, ThroughputMonitor}
   import deepwit.optimizer.LearningRateSchedules.ConstantLearningRate
-  import dimwit.Conversions.given
 
   private case class State(loss: Float)
 

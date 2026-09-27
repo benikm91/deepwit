@@ -2,7 +2,6 @@ package deepwit.normalization
 
 import deepwit.*
 import dimwit.*
-import dimwit.Conversions.given
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.funspec.AnyFunSpec
 

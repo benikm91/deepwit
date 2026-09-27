@@ -1,7 +1,6 @@
 package deepwit.examples.mnistClassification
 
 import dimwit.*
-import dimwit.Conversions.given
 import dimwit.optimizer.GradientDescent
 
 import deepwit.loss.CategoricalCrossEntropy
