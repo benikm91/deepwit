@@ -4,7 +4,7 @@ import java.io.File
 import dimwit.*
 import dimwit.python.PyBridge.liftPyTensor
 import me.shadaj.scalapy.py
-import dimwit.stats.Uniform
+import dimwit.stats.DiscreteUniform
 import dimwit.hardware.DeviceBackend.GPU
 
 object FineWebDataset:
@@ -28,7 +28,7 @@ object FineWebDataset:
     val maxIdx = data.shape(Axis[Sample]) - batchSize - 1
     val randomIndices = IndependentDistribution.fromUnivariate(
       Shape1(Axis[Sample] -> batchSize),
-      Uniform(Tensor0(0), Tensor0(maxIdx))
+      DiscreteUniform(0, maxIdx)
     ).sample(key)
     val shiftedIndices = randomIndices +! 1
     val inputs = randomIndices.vmap(Axis[Sample])(startIndex =>
