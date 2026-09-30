@@ -13,8 +13,8 @@ DeepWit's API is expressed in DimWit's tensor types, so you will import from bot
 
 ```scala
 libraryDependencies ++= Seq(
-  "ch.contrafactus" %% "deepwit-core" % "0.1.0",
-  "ch.contrafactus" %% "dimwit-core" % "0.1.0"
+  "ch.contrafactus" %% "deepwit-core" % "0.2.0",
+  "ch.contrafactus" %% "dimwit-core" % "0.2.0"
 )
 ```
 
@@ -176,4 +176,4 @@ contributes the modules, their parameters and their initialization, and the loss
 the two are separate libraries — DimWit stands on its own for any numerical work, and DeepWit is what
 you add when that work is a model being fitted.
 
-DeepWit `0.2-SNAPSHOT` tracks DimWit `0.2-SNAPSHOT`; the two versions move together.
+DeepWit `0.2.0` builds on DimWit `0.2.0`; the two versions move together.
