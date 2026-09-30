@@ -4,7 +4,7 @@ import scala.sys.process._
 run / fork := true
 Global / cancelable := true
 
-ThisBuild / version := "0.2-SNAPSHOT"
+ThisBuild / version := "0.2.0"
 ThisBuild / scalaVersion := "3.9.0"
 ThisBuild / organization := "ch.contrafactus"
 ThisBuild / versionScheme := Some("early-semver")
@@ -73,7 +73,7 @@ lazy val core = (project in file("core"))
       "org.scalacheck" %% "scalacheck" % "1.18.0" % Test,
       "org.scalatestplus" %% "scalacheck-1-18" % "3.2.19.0" % Test,
       "dev.scalapy" %% "scalapy-core" % "0.5.3",
-      "ch.contrafactus" %% "dimwit-core" % "0.2-SNAPSHOT" changing ()
+      "ch.contrafactus" %% "dimwit-core" % "0.2.0"
     ),
     // ScalaPy drives a single embedded CPython interpreter, and two suites importing jax at the same
     // time race into a partially initialized module. Whichever suites happen to touch a tensor first
@@ -98,7 +98,10 @@ lazy val examples = (project in file("examples"))
     name := "deepwit-examples",
     libraryDependencies ++= Seq(
       "dev.scalapy" %% "scalapy-core" % "0.5.3",
-      "ch.contrafactus" %% "plotwit-core" % "0.2-SNAPSHOT" changing ()
+      // plotwit has no release yet and its snapshot still depends on dimwit 0.2-SNAPSHOT, which
+      // clashes with the released dimwit that core uses. Drop it so examples uses core's dimwit.
+      ("ch.contrafactus" %% "plotwit-core" % "0.2-SNAPSHOT" changing ())
+        .exclude("ch.contrafactus", "dimwit-core_3")
     ),
     fork := true,
     javaOptions ++= scalapyJavaOptions,
