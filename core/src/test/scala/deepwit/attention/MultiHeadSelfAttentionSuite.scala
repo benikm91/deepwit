@@ -64,6 +64,11 @@ class MultiHeadSelfAttentionSuite extends AnyFunSpec with Matchers:
       val b = attention(context(-99f))
       (a.slice(Axis[Ctx].at(0)) - b.slice(Axis[Ctx].at(0))).abs.max.item should be > 1e-3f
 
+    it("is causal self-attention with a custom causal mask"):
+      val custom = MultiHeadCustomSelfAttention(params, causalMask[Ctx, Ctx], AttentionScore.scaledDotProduct)
+      val causal = MultiHeadCausalSelfAttention(Axis[Ctx], params)
+      custom(context(13f)) should approxEqual(causal(context(13f)), 1e-6f)
+
   describe("MultiHeadSelfAttention.Params.xavierUniformDepthScaled"):
 
     it("splits the embedding space evenly across the heads"):

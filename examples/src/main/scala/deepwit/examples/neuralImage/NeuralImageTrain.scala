@@ -40,8 +40,8 @@ def batchStream(
 ): Iterator[TrainBatch] =
   // permute across pixels to avoid biasing the network to any particular region of the image
   val permutation = Random.permutation(coordinates.shape.extent(Axis[Pixel]))(key)
-  val coordinatesShuffled = coordinates.take(Axis[Pixel])(permutation)
-  val targetsShuffled = targets.take(Axis[Pixel])(permutation)
+  val coordinatesShuffled = coordinates.slice(Axis[Pixel].at(permutation))
+  val targetsShuffled = targets.slice(Axis[Pixel].at(permutation))
   val totalPixels = coordinates.shape(Axis[Pixel])
   Iterator.iterate(0)(_ + batchSize).map: offset =>
     val batchIds = (0 until batchSize).map(i => (offset + i) % totalPixels)
