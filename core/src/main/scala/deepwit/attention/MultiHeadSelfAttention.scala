@@ -65,8 +65,8 @@ class MultiHeadCausalSelfAttention[Context: Λ, Embedding: Λ, V: IsFloating](
     val query = embedding.dot(Axis[Embedding])(weights.queryWeights)
     val key = embedding.dot(Axis[Embedding])(weights.keyWeights)
     val value = embedding.dot(Axis[Embedding])(weights.valueWeights)
-    val keys = cache.keys.set(contextAxis.at(position))(key)
-    val values = cache.values.set(contextAxis.at(position))(value)
+    val keys = cache.keys.updated(contextAxis.at(position))(key)
+    val values = cache.values.updated(contextAxis.at(position))(value)
     val headValues = decoding.attendAt(
       queries = stack(Seq(query), contextAxis),
       keys = keys,
@@ -74,7 +74,7 @@ class MultiHeadCausalSelfAttention[Context: Λ, Embedding: Λ, V: IsFloating](
       targetPositions = stack(Seq(position), contextAxis),
       sourcePositions = Tensor1(contextAxis).fromRange(0 until keys.shape(contextAxis))
     )
-    (decoding.projectHeads(headValues).slice(contextAxis.at(0)), KVCache(keys, values))
+    (decoding.projectHeads(headValues).select(contextAxis.at(0)), KVCache(keys, values))
 
 /** Multi-head self-attention with [[MultiHeadCustomAttention]]. */
 class MultiHeadCustomSelfAttention[Context: Λ, Embedding: Λ, V: IsFloating](

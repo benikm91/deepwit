@@ -32,8 +32,8 @@ class KVCacheSuite extends AnyFunSpec with Matchers:
 
     it("works under jit"):
       val decode = jit(attention.decode)
-      val (attended, _) = decode(KVCache.empty(ctxExtent, params), Tensor0(0), context.slice(Axis[Ctx].at(0)))
-      attended should approxEqual(attention(context).slice(Axis[Ctx].at(0)), 1e-5f)
+      val (attended, _) = decode(KVCache.empty(ctxExtent, params), Tensor0(0), context(Axis[Ctx].at(0)))
+      attended should approxEqual(attention(context).select(Axis[Ctx].at(0)), 1e-5f)
 
   describe("prefill"):
 
@@ -48,6 +48,6 @@ class KVCacheSuite extends AnyFunSpec with Matchers:
       val promptOnly = where_!(Tensor0(promptLength) >! positions, context, noise)
       val (_, cache) = attention.prefill(promptOnly)
       (promptLength until ctxExtent.size).foldLeft(cache): (cache, position) =>
-        val (attended, nextCache) = attention.decode(cache, Tensor0(position), context.slice(Axis[Ctx].at(position)))
-        attended should approxEqual(attention(context).slice(Axis[Ctx].at(position)), 1e-5f)
+        val (attended, nextCache) = attention.decode(cache, Tensor0(position), context(Axis[Ctx].at(position)))
+        attended should approxEqual(attention(context).select(Axis[Ctx].at(position)), 1e-5f)
         nextCache
